@@ -10,7 +10,7 @@ import persistencia.Propiedades;
 
 public class main
 {
-	public static void main (String[] args) throws Exc_Persistencia, IOException
+	public static void main (final String[] args) throws Exc_Persistencia, IOException
 	{
 		try
 			{
