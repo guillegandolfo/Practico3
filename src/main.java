@@ -14,11 +14,7 @@ public class main
 	{
 		try
 			{
-<<<<<<< HEAD
-			//hola
-=======
-			//hola2
->>>>>>> refs/remotes/origin/master
+
 				Propiedades p = new Propiedades();
 				String driver = p.buscar("driver");
 				String url = p.buscar("url");
