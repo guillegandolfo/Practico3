@@ -14,6 +14,7 @@ public class main
 	{
 		try
 			{
+			//hola
 				Propiedades p = new Propiedades();
 				String driver = p.buscar("driver");
 				String url = p.buscar("url");
