@@ -13,7 +13,7 @@ public class Exc_AccessoBD extends Exception{
 	}
 	
 	public String DarMensajes () {
-		return "Error al conectarce a la base";
+		return "Error al ingresar registro en la base";
 	}
 
 }

@@ -22,6 +22,8 @@ import ValueObjet.Examen;
 import logica.Excepciones.objetos.Exc_AccessoBD;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VentanaResultado extends JFrame {
 
@@ -75,11 +77,31 @@ public class VentanaResultado extends JFrame {
 		contentPane.add(lblCalificacion);
 		
 		txtfcedula = new JTextField();
+		txtfcedula.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+				char varchar = e.getKeyChar();
+				if(!(Character.isDigit(varchar)) || varchar == KeyEvent.VK_BACK_SPACE || varchar == KeyEvent.VK_DELETE) {
+					e.consume();
+				}
+				
+			}
+		});
 		txtfcedula.setBounds(79, 34, 127, 25);
 		contentPane.add(txtfcedula);
 		txtfcedula.setColumns(10);
 		
 		txtfcalificacion = new JTextField();
+		txtfcalificacion.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {				
+				char varchar = e.getKeyChar();
+				if(!(Character.isDigit(varchar)) || varchar == KeyEvent.VK_BACK_SPACE || varchar == KeyEvent.VK_DELETE) {
+					e.consume();
+				}
+			}
+		});
 		txtfcalificacion.setColumns(10);
 		txtfcalificacion.setBounds(79, 92, 127, 26);
 		contentPane.add(txtfcalificacion);
@@ -91,8 +113,21 @@ public class VentanaResultado extends JFrame {
 				if(txtfcalificacion.getText() != null && txtfcedula.getText() != null && codigoseleccionado != null ) {
 					int calificacion = Integer.parseInt(txtfcalificacion.getText());
 					int cedula = Integer.parseInt(txtfcedula.getText());
-					micontrolador.IngresarResultado(codigoseleccionado,cedula,calificacion);
-					JOptionPane.showMessageDialog(null, "Resulato ingresado correctamente", "Error", JOptionPane.ERROR_MESSAGE);
+					try {
+						try {
+							micontrolador.IngresarResultado(codigoseleccionado,cedula,calificacion);
+							JOptionPane.showMessageDialog(null, "Calificacion ingresada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+						} catch (Exc_AccessoBD e1) {
+
+							JOptionPane.showMessageDialog(null, e1.DarMensajes() , "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						Exc_AccessoBD ExaccessoBD  = new Exc_AccessoBD("Error al intentar guardar en la base");
+						JOptionPane.showMessageDialog(null, ExaccessoBD.DarMensajes() , "Error", JOptionPane.ERROR_MESSAGE);
+			
+					}			
 				}
 				else
 				{

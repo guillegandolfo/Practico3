@@ -3,6 +3,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import com.mysql.jdbc.Connection;
 import persistencia.Propiedades;
 import accessoBD.AccessoBD;
@@ -25,20 +27,24 @@ public class VentanaResultadoController {
 		String usuario = prop.GetUser();
 		String password = prop.GetPass();
 		con = (Connection) DriverManager.getConnection(url, usuario, password);  
+		con.setTransactionIsolation
+		(Connection.TRANSACTION_SERIALIZABLE);
+		con.setAutoCommit(false);
 				
 	}
 
 	
-	public void IngresarResultado(String codigo,int cedula,int calificacion) {
+	public void IngresarResultado(String codigo,int cedula,int calificacion) throws SQLException, Exc_AccessoBD {
 		
 		try {
 			AccessoBD accBD = new AccessoBD();
 			Resultado res = new Resultado(cedula, codigo, calificacion);
 			accBD.ingresarResultado(this.con, res);
+			con.commit();
 		}
 		catch (Exc_AccessoBD e) {
-
-			e.printStackTrace();
+			con.rollback();
+			throw e;
 		}		
 	}
 	
