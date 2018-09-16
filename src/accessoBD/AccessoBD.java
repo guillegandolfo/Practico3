@@ -15,7 +15,12 @@ import ValueObjet.Resultado;
 
 public class AccessoBD {
 	
-	public LinkedList <Examen> listarExamenes(Connection con) throws Exc_AccessoBD{
+ 	public AccessoBD() {
+ 		
+ 	}
+	
+	
+	public LinkedList <Examen> listarExamenes(Connection con) throws Exc_AccessoBD {
 		
 		try {
 		LinkedList <Examen> Examenes = new LinkedList <Examen>();

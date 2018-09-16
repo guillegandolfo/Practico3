@@ -35,11 +35,17 @@ public class main
 				pstmt.execute();
 				System.out.println("Creo la base de datos");
 				
-				pstmt = con.prepareStatement("CREATE Table Bedelias.Examenes(Codigo Varchar(45) not null, Materia Varchar(45) not null, Precio varchar(45) not null, primary key (Codigo))");
+				pstmt = con.prepareStatement("CREATE Table Bedelias.Examenes(Codigo Varchar(45) not null, Materia Varchar(45) not null, Periodo varchar(45) not null, primary key (Codigo))");
 				pstmt.execute();
 				System.out.println("Creo la tabla Examenes");
 				
-				pstmt = con.prepareStatement("CREATE Table Bedelias.Resultados(Cedula int not null, Codigo Varchar(45) not null, Calificacion int not null, primary key (Cedula), CONSTRAINT fk_Codigo FOREIGN KEY (Codigo) REFERENCES Examenes (Codigo)");
+				pstmt = con.prepareStatement("CREATE Table Bedelias.Resultados(\r\n" + 
+						"Cedula int not null,\r\n" + 
+						"Codigo Varchar(45) not null,\r\n" + 
+						"Calificacion int not null,\r\n" + 
+						"primary key (Cedula),\r\n" + 
+						"CONSTRAINT fk_Codigo FOREIGN KEY (Codigo) REFERENCES Examenes (Codigo)\r\n" + 
+						");");
 				pstmt.execute();
 				System.out.println("Creo la tabla Resultado");
 				
