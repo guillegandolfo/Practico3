@@ -1,7 +1,7 @@
 package accessoBD;
 
 public class Consultas {
-	
+	/**/
 	public Consultas() {
 	}
 	
